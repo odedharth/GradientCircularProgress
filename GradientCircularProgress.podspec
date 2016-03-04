@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.social_media_url   = "http://twitter.com/keygx"
   s.platform     = :ios
   s.ios.deployment_target = '8.0'
-  s.source       = { :git => "https://github.com/keygx/GradientCircularProgress.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/odedharth/GradientCircularProgress.git", :tag => "#{s.version}" }
   s.source_files  = "Source/*"
   s.requires_arc = true
 end
