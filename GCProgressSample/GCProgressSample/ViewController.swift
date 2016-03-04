@@ -12,6 +12,7 @@ import GradientCircularProgress
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var styleTableView: UITableView!
+    @IBOutlet weak var coolView: UIView!
     
     var timer: NSTimer?
     var v: Double = 0.0
@@ -39,7 +40,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         styleTableView.delegate = self
         styleTableView.dataSource = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -53,7 +54,7 @@ extension ViewController {
             // Style.swift
             switch row {
             case 0:
-                self.progress.showAtRatio(display: true, style: Style())
+                self.progress.showAtRatio(display: true, style: Style(), baseView: coolView)
                 self.startProgressAtRatio()
             case 1:
                 self.progress.show(message: "Loading", style: Style())
@@ -67,7 +68,7 @@ extension ViewController {
             // BlueDarkStyle.swift
             switch row {
             case 0:
-                self.progress.showAtRatio(display: true, style: BlueDarkStyle())
+                self.progress.showAtRatio(display: true, style: BlueDarkStyle(), baseView: coolView)
                 self.startProgressAtRatio()
             case 1:
                 self.progress.show(message: "Loading", style: BlueDarkStyle())
@@ -81,7 +82,7 @@ extension ViewController {
             // OrangeClearStyle.swift
             switch row {
             case 0:
-                self.progress.showAtRatio(display: true, style: OrangeClearStyle())
+                self.progress.showAtRatio(display: true, style: OrangeClearStyle(), baseView: coolView)
                 self.startProgressAtRatio()
             case 1:
                 self.progress.show(style: OrangeClearStyle())
@@ -92,7 +93,7 @@ extension ViewController {
             // GreenLightStyle.swift
             switch row {
             case 0:
-                self.progress.showAtRatio(display: true, style: GreenLightStyle())
+                self.progress.showAtRatio(display: true, style: GreenLightStyle(), baseView: coolView)
                 self.startProgressAtRatio()
             case 1:
                 self.progress.show(message: "Loading", style: GreenLightStyle())
@@ -106,7 +107,7 @@ extension ViewController {
             // BlueIndicatorStyle.swift
             switch row {
             case 0:
-                self.progress.showAtRatio(display: false, style: BlueIndicatorStyle())
+                self.progress.showAtRatio(display: false, style: BlueIndicatorStyle(), baseView: coolView)
                 self.startProgressAtRatio()
             case 1:
                 self.progress.show(style: BlueIndicatorStyle())
@@ -117,7 +118,7 @@ extension ViewController {
             // MyStyle.swift
             switch row {
             case 0:
-                self.progress.showAtRatio(display: true, style: MyStyle())
+                self.progress.showAtRatio(display: true, style: MyStyle(), baseView: coolView)
                 self.startProgressAtRatio()
             case 1:
                 self.progress.show(message: "Loading", style: MyStyle())
@@ -134,8 +135,8 @@ extension ViewController {
     // for demo
     func delayCloseProgress() {
         AsyncUtil().dispatchOnMainThread({
-                self.progress.dismiss()
-                self.available = true
+            self.progress.dismiss()
+            self.available = true
             },
             delay: 2.0)
     }
@@ -161,20 +162,20 @@ extension ViewController {
             self.timer!.invalidate()
             
             AsyncUtil().dispatchOnMainThread({
-                    self.progress.updateMessage(message: "Completed!")
-                    self.progress.dismiss() { Void in
-                        self.available = true
-                    }
+                self.progress.updateMessage(message: "Completed!")
+                self.progress.dismiss() { Void in
+                    self.available = true
+                }
                 }, delay: 0.8)
             
             return
-        
+            
         } else if self.v > 0.75 {
             self.progress.updateMessage(message: "Download\n3 / 4")
-        
+            
         } else if self.v > 0.5 {
             self.progress.updateMessage(message: "Download\n2 / 4")
-        
+            
         } else if self.v > 0.25 {
             self.progress.updateMessage(message: "Download\n1 / 4")
         }

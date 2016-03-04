@@ -14,6 +14,7 @@ class ProgressViewController : UIViewController {
     private var blurView: UIVisualEffectView?
     private var progressAtRatioView: ProgressAtRatioView?
     private var circularProgressView: CircularProgressView?
+    var baseView : UIView?
     internal var prop: Property?
     
     internal var ratio: CGFloat = 0.0 {
@@ -55,7 +56,7 @@ class ProgressViewController : UIViewController {
     
     private func getViewRect() {
         
-        let window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let window = UIWindow(frame: baseView!.frame)
         
         viewRect = window.frame
     }
@@ -76,7 +77,7 @@ class ProgressViewController : UIViewController {
         self.view.addSubview(blurView)
     }
     
-    internal func arc(display: Bool, style: StyleProperty) {
+    internal func arc(display: Bool, style: StyleProperty, baseView :  UIView) {
         
         prop = Property(style: style)
         
@@ -86,11 +87,13 @@ class ProgressViewController : UIViewController {
         
         win.userInteractionEnabled = !(prop.backgroundStyle.hashValue == 0) ? true : false // 0 == .None
         
+        self.baseView = baseView
+        
         getViewRect()
         
         getBlurView()
         
-        progressAtRatioView = ProgressAtRatioView(frame: CGRectMake(0, 0, prop.progressSize, prop.progressSize))
+        progressAtRatioView = ProgressAtRatioView(frame: CGRect(origin: baseView.frame.origin, size: baseView.frame.size))
         
         guard let progressAtRatioView = progressAtRatioView else {
             return
@@ -103,7 +106,8 @@ class ProgressViewController : UIViewController {
             progressAtRatioView.showRatio()
         }
         
-        progressAtRatioView.center = self.view.center
+        progressAtRatioView.center = self.baseView!.center
+        progressAtRatioView.center = self.baseView!.center
         self.view.addSubview(progressAtRatioView)
     }
     
@@ -120,7 +124,7 @@ class ProgressViewController : UIViewController {
         getViewRect()
         
         getBlurView()
-                
+        
         circularProgressView = CircularProgressView(frame: CGRectMake(0, 0, prop.progressSize, prop.progressSize))
         
         guard let circularProgressView = circularProgressView else {
@@ -146,7 +150,7 @@ class ProgressViewController : UIViewController {
         
         circularProgressView.message = message
     }
-  
+    
     internal func dismiss(t: Double) {
         
         let delay = t * Double(NSEC_PER_SEC)

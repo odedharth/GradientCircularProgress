@@ -18,16 +18,16 @@ public class GradientCircularProgress {
     
     public init() {}
     
-    public func showAtRatio(display display: Bool = true, style: StyleProperty = Style()) -> Void {
+    public func showAtRatio(display display: Bool = true, style: StyleProperty = Style(), baseView : UIView) -> Void {
         if !available {
             return
         }
         available = false
         
-        getProgressAtRatio(display, style: style)
+        getProgressAtRatio(display, style: style, baseView: baseView)
     }
     
-    private func getProgressAtRatio(display: Bool, style: StyleProperty) {
+    private func getProgressAtRatio(display: Bool, style: StyleProperty, baseView : UIView) {
         baseWindow = BaseWindow()
         progressViewController = ProgressViewController()
         
@@ -37,7 +37,7 @@ public class GradientCircularProgress {
         
         win.rootViewController = vc
         win.backgroundColor = UIColor.clearColor()
-        vc.arc(display, style: style)
+        vc.arc(display, style: style, baseView: baseView)
     }
     
     public func show(style style: StyleProperty = Style()) -> Void {
@@ -91,7 +91,7 @@ public class GradientCircularProgress {
     
     public func dismiss() -> Void {
         if available {
-           return
+            return
         }
         
         if let vc = progressViewController {
