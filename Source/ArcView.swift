@@ -56,7 +56,7 @@ class ArcView : UIView {
         color.setStroke()
         
         arc.lineWidth = lineWidth
-        arc.lineCapStyle = prop.arcLineCapStyle
+        arc.lineCapStyle = .Round
         arc.stroke()
     }
 }
