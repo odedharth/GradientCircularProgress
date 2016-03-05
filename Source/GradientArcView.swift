@@ -58,7 +58,7 @@ class GradientArcView : UIView {
             let arcPoint: CGPoint = CGPoint(x: rect.width/2, y: rect.height/2)
             let arcRadius: CGFloat = circularRect.width/2 + prop.arcLineWidth/2
             let arcStartAngle: CGFloat = -CGFloat(M_PI_2)
-            let arcEndAngle: CGFloat = i * 2.0 * CGFloat(M_PI) - CGFloat(M_PI_2) - CGFloat(M_PI_2)*(20/360)
+            let arcEndAngle: CGFloat = i * 2.0 * CGFloat(M_PI) - CGFloat(M_PI_2) 
             
             if currentAngle == 0.0 {
                 currentAngle = arcStartAngle
